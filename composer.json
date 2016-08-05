@@ -1,5 +1,5 @@
 {
-    "name": "MNHcC/ZendBase",
+    "name": "mnhcc/zendbase",
     "description": "Helper and base for MNHcC Zend Projects",
     "version": "0.4.1-dev",
     "type": "module",
