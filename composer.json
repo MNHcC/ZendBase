@@ -1,9 +1,9 @@
 {
     "name": "MNHcC/ZendBase",
     "description": "Helper and base for MNHcC Zend Projects",
-    "version": "1.0.0",
+    "version": "0.4.1-dev",
     "type": "module",
-    "license": "MIT",
+    "license": "GPL",
     "tags": [
         "zend framework",
         "zf2",
@@ -17,18 +17,23 @@
             "role": "Developer"
         }
     ],
+    "repositories": [{
+        "type": "vcs",
+        "url": "https://github.com/MNHcC/Zend3bcHelper.git"
+    }],
     "require": {
         "php": ">=5.6.0",
         "zendframework/zend-eventmanager": "*",
         "zendframework/zend-config": "*",
-        "zendframework/zend-mvc": "*"
+        "zendframework/zend-mvc": "*",
+        "MNHcC/Zend3bcHelper": "dev-master"
     },
     "autoload": {
-        "psr-0": {
-            "MNHcC": "src/"
+        "psr-4": {
+            "MNHcC\\": "src/"
         },
         "classmap": [
-            "./Module.php"
+            "src/Module.php"
         ]
     }
 }
