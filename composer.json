@@ -1,0 +1,34 @@
+{
+    "name": "MNHcC/ZendBase",
+    "description": "Helper and base for MNHcC Zend Projects",
+    "version": "1.0.0",
+    "type": "module",
+    "license": "MIT",
+    "tags": [
+        "zend framework",
+        "zf2",
+        "helper"
+    ],
+    "homepage": "https://github.com/MNHcC/ZendBase",
+    "authors": [
+        {
+            "name": "Michael Hegenbarth",
+            "homepage": "http://mnhcc.mn-hegenbarth.de/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0",
+        "zendframework/zend-eventmanager": "*",
+        "zendframework/zend-config": "*",
+        "zendframework/zend-mvc": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "MNHcC": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
+    }
+}
