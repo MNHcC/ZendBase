@@ -17,10 +17,16 @@
             "role": "Developer"
         }
     ],
-    "repositories": [{
-        "type": "vcs",
-        "url": "https://github.com/MNHcC/Zend3bcHelper.git"
-    }],
+      "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/MNHcC/Zend3bcHelper.git"
+        }
+    ],
+    "source": {
+        "url": "https://github.com/MNHcC/ZendBase.git",
+        "type": "git"
+    },
     "require": {
         "php": ">=5.6.0",
         "zendframework/zend-eventmanager": "*",
