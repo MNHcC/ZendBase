@@ -18,8 +18,9 @@
         }
     ],
     "source": {
+        "type": "git",
         "url": "https://github.com/MNHcC/ZendBase.git",
-        "type": "git"
+        "reference": "mnhcc/zendbase"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
