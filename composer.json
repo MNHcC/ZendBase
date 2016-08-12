@@ -27,7 +27,7 @@
         "url": "https://github.com/MNHcC/ZendBase.git",
         "reference": "master"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "repositories": [
         {
