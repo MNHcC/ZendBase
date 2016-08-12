@@ -37,9 +37,9 @@
     ],
     "require": {
         "php": ">=5.6.0",
-        "zendframework/zend-eventmanager": "*",
-        "zendframework/zend-config": "*",
-        "zendframework/zend-mvc": "*",
+        "zendframework/zend-eventmanager": "~2.6.2 || ~3.0",
+        "zendframework/zend-config": "~2.6 || ~3.0",
+        "zendframework/zend-mvc": "~2.7 || ~3.0",
         "MNHcC/Zend3bcHelper": "~0.1.0-dev"
     },
     "autoload": {
