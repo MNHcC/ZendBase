@@ -17,6 +17,11 @@
             "role": "Developer"
         }
     ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.4.1-dev"
+        }
+    },
     "source": {
         "type": "git",
         "url": "https://github.com/MNHcC/ZendBase.git",
@@ -35,7 +40,7 @@
         "zendframework/zend-eventmanager": "*",
         "zendframework/zend-config": "*",
         "zendframework/zend-mvc": "*",
-        "MNHcC/Zend3bcHelper": "dev-master"
+        "MNHcC/Zend3bcHelper": "~0.1.0-dev"
     },
     "autoload": {
         "psr-4": {
