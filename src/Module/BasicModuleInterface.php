@@ -4,8 +4,7 @@ namespace MNHcC\Module {
 
     use Zend\ModuleManager\Feature\BootstrapListenerInterface;
     use Zend\EventManager\EventManagerAwareInterface;
-
-    use ServiceLocatorAwareInterface;
+    use Zend\ServiceManager\ServiceLocatorAwareInterface; //use from zf2 or on zf3 from MNHcC\Zend3bcHelper
 
     /**
      * Description of BasicModuleInterface

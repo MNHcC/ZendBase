@@ -42,6 +42,8 @@
             "MNHcC\\": "src/"
         },
         "classmap": [
+            "src/Module/BasicModuleInterface.php",
+            "src/Module/BasicModule.php",
             "src/Module.php"
         ]
     }

@@ -8,17 +8,15 @@
 
 namespace MNHcC\Module {
 
-    use \Zend\ModuleManager\Feature\BootstrapListenerInterface,
-	\Zend\EventManager\EventInterface,
-	\Zend\EventManager\EventManagerAwareInterface,
-	\Zend\EventManager\EventManagerAwareTrait,
-	\Zend\EventManager\EventManagerInterface,
-	\Zend\Mvc\ApplicationInterface,
-	\Zend\Mvc\MvcEvent,
-	\Zend\ServiceManager\ServiceLocatorAwareInterface,
-	\Zend\ServiceManager\ServiceLocatorAwareTrait,
-	\MNHcC\Event\Listener\ModuleMatchListener,
-	\MNHcC\Event\Mvc\ModuleMatchEvent;
+    use Zend\ModuleManager\Feature\BootstrapListenerInterface;
+    use Zend\EventManager\EventInterface;
+    use Zend\EventManager\EventManagerAwareInterface;
+    use Zend\EventManager\EventManagerAwareTrait;
+    use Zend\EventManager\EventManagerInterface;
+    use Zend\Mvc\ApplicationInterface;
+    use Zend\ServiceManager\ServiceLocatorAwareInterface;
+    use Zend\ServiceManager\ServiceLocatorAwareTrait;
+    use MNHcC\Event\Listener\ModuleMatchListener;
 
     /**
      * BasicModule
@@ -32,6 +30,7 @@ namespace MNHcC\Module {
 	use EventManagerAwareTrait {
 	    setEventManager as setEventManagerTrait;
 	}
+        
 	use  ServiceLocatorAwareTrait;
 	
 	/**
@@ -92,20 +91,10 @@ namespace MNHcC\Module {
 	    }
 	    /* @var $eventManager \Zend\EventManager\EventManagerInterface */
 	    $eventManager = $this->getApplication()->getEventManager();
-//	    $eventManager->attach([MvcEvent::EVENT_DISPATCH],
-//		    [$this, 'onDispatch'], 100);
-	    
 	    $moduleMatchListener = new ModuleMatchListener($this);
 	    $moduleMatchListener->attach($eventManager, 100);
-	    	    
-	    //$this->getApplication()->getEventManager()->attach(MvcEvent::EVENT_DISPATCH, [$this, 'onDispatch'], 100);
-	}
 
-//	public function onDispatch(MvcEvent $e) { //set template fals controller nicht gefunden
-//	    $this->getEventManager()->trigger(
-//		    $e->setName(ModuleMatchEvent::EVENT_BEFORE_MODULE_MATCH)
-//		    ->setParam('module', $this));
-//	}
+	}
 
     }
 
