@@ -17,6 +17,7 @@ namespace MNHcC {
     use Zend\ServiceManager\ServiceLocatorAwareInterface;
     use Zend\ServiceManager\ServiceLocatorAwareTrait;
     use MNHcC\Event\Listener\ModuleMatchListener;
+    use MNHcC\Module\BasicModule;
 
     /**
      * Module
@@ -25,7 +26,7 @@ namespace MNHcC {
      * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
      * @license default
      */
-    class Module implements BootstrapListenerInterface, EventManagerAwareInterface, ServiceLocatorAwareInterface {
+    class Module extends BasicModule {
 
         use EventManagerAwareTrait {
             setEventManager as setEventManagerTrait;
@@ -44,12 +45,13 @@ namespace MNHcC {
          * @return mixed
          */
         public function setEventManager(EventManagerInterface $events) {
-            return $this->setEventManagerTrait($events)
-                            ->getEventManager()
-                            ->setIdentifiers(\array_merge(
-                                            $this->getEventManager()->getIdentifiers(), ['Module']
-                                    )
-            );
+             $this->setEventManagerTrait($events);
+             return $this->getEventManager()
+                        ->setIdentifiers(
+                            \array_merge(
+                                $this->getEventManager()->getIdentifiers(), ['Module']
+                            )
+                        );
         }
 
         /**
