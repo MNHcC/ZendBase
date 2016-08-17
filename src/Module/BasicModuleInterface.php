@@ -13,6 +13,18 @@ namespace MNHcC\Module {
      */
     interface BasicModuleInterface extends BootstrapListenerInterface, EventManagerAwareInterface, ServiceLocatorAwareInterface {
         
+	/**
+	 * 
+	 * @return \Zend\Mvc\ApplicationInterface
+	 */
+	public function getApplication();
+
+	/**
+	 * 
+	 * @param \Zend\Mvc\ApplicationInterface $application
+	 * @return static
+	 */
+	public function setApplication(\Zend\Mvc\ApplicationInterface $application);
     }
 
 }
