@@ -8,15 +8,13 @@
 
 namespace MNHcC\Module {
 
-    use Zend\ModuleManager\Feature\BootstrapListenerInterface;
     use Zend\EventManager\EventInterface;
-    use Zend\EventManager\EventManagerAwareInterface;
     use Zend\EventManager\EventManagerAwareTrait;
     use Zend\EventManager\EventManagerInterface;
-    use Zend\Mvc\ApplicationInterface;
-    use Zend\ServiceManager\ServiceLocatorAwareInterface;
     use Zend\ServiceManager\ServiceLocatorAwareTrait;
+    
     use MNHcC\Event\Listener\ModuleMatchListener;
+    use MNHcC\Module\BasicModuleInterface;
 
     /**
      * BasicModule
@@ -25,7 +23,7 @@ namespace MNHcC\Module {
      * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
      * @license default
      */
-    abstract class BasicModule implements BootstrapListenerInterface, EventManagerAwareInterface, ServiceLocatorAwareInterface {
+    abstract class BasicModule implements BasicModuleInterface {
 
 	use EventManagerAwareTrait {
 	    setEventManager as setEventManagerTrait;
@@ -73,13 +71,13 @@ namespace MNHcC\Module {
 	 * @param \Zend\Mvc\ApplicationInterface $application
 	 * @return static
 	 */
-	public function setApplication(ApplicationInterface $application) {
+	public function setApplication(\Zend\Mvc\ApplicationInterface $application) {
 	    $this->application = $application;
 	    return $this;
 	}
 
 	/**
-	 * Listen to the bootstrap event
+	 * Listen to the bootstrap event end register the ModuleMatchListener
 	 *
 	 * @param EventInterface $e
 	 * @return array
@@ -96,6 +94,9 @@ namespace MNHcC\Module {
 
 	}
 
+        
+        
+        
     }
 
 }

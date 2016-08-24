@@ -10,13 +10,13 @@
 
 namespace MNHcC\Event\Listener {
 
-    use \Zend\EventManager\AbstractListenerAggregate,
-	\Zend\EventManager\EventManagerInterface,
-	\Zend\EventManager\EventManager,
-	\Zend\EventManager\EventManagerAwareInterface,
-	\Zend\Mvc\MvcEvent,
-	\MNHcC\Event\Mvc\ModuleMatchEvent,
-	\MNHcC\Helper\ObjectHelper;
+    use Zend\EventManager\AbstractListenerAggregate;
+    use Zend\EventManager\EventManagerInterface;
+    use Zend\EventManager\EventManager;
+    use Zend\EventManager\EventManagerAwareInterface;
+    use Zend\Mvc\MvcEvent;
+    use MNHcC\Event\Mvc\ModuleMatchEvent;
+    use MNHcC\Helper\ObjectHelper;
 
     class ModuleMatchListener extends AbstractListenerAggregate {
 
@@ -58,12 +58,13 @@ namespace MNHcC\Event\Listener {
 	public function onDispatch(MvcEvent $e) {
 
 	    if (!$e->getRouteMatch()) {
-		return; //no route noch modul match
+		return; //no route, no modul match
 	    }
 
 	    $module = $this->getModule();
 	    $controller = $e->getRouteMatch()->getParam('controller');
 	    $mod_rfl = new \ReflectionObject($module);
+            
 	    /* @var $eventManager EventManagerInterface */
 	    $eventManager = $module->getEventManager();
 
@@ -77,16 +78,18 @@ namespace MNHcC\Event\Listener {
 			    [$mod_rfl->getShortName(), $mod_rfl->getName(), 'module']));
 	    
 	    /* @var $event ModuleMatchEvent */
-	    $event = ObjectHelper::cast($e, ModuleMatchEvent::class)
-		    ->setModule($module)
-		    ->setViewModel($e->getViewModel())
-		    ->setParam('view_model', $e->getViewModel());
-	    
-	    $eventManager->trigger($event->setName(ModuleMatchEvent::EVENT_BEFORE_MODULE_MATCH));
+	    $event = ObjectHelper::cast($e, ModuleMatchEvent::class);
+            $event->setModule($module);
+            $event->setViewModel($e->getViewModel());
+            $event->setParam('view_model', $e->getViewModel());
+            $event->setName(ModuleMatchEvent::EVENT_BEFORE_MODULE_MATCH);
+            
+            $eventManager->triggerEvent($event);
 
 	    if (\strpos($controller, $mod_rfl->getNamespaceName(), 0) === 0) { //check the namespace
 		//if this module
-		$eventManager->trigger($event->setName(ModuleMatchEvent::EVENT_MODULE_MATCH));
+                $event->setName(ModuleMatchEvent::EVENT_MODULE_MATCH);
+		$eventManager->triggerEvent($event);
 	    }
 	}
 

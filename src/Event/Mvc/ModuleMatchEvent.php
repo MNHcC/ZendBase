@@ -124,8 +124,8 @@ namespace MNHcC\Event\Mvc {
 	 */
 	public function setModule($module) {
 	    $this->module = $module;
-	    return $this->setParam('module', $module)
-		->setModuleNamefromObject($module);
+	    $this->setParam('module', $module);
+            return $this->setModuleNamefromObject($module);
 	}
 	
 	public function setModuleNamefromObject($module) {
