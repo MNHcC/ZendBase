@@ -1,0 +1,10 @@
+language: php  # specify your language
+php: # specify options for your language
+  # using major version aliases
+  
+- 5.6
+- 7.0
+before_script:
+  - composer install
+  
+script: vendor/bin/phpunit --configuration ./test/phpunit.xml --coverage-text
