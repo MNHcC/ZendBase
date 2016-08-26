@@ -9,8 +9,15 @@
  * @license BSD
  */
 
-namespace MNHcC {
+namespace MNHcC\Exception {
 
-    return [
-    ];
+    /**
+     * Description of LogicException
+     *
+     * @author carschrotter
+     */
+    class LogicException extends \LogicException {
+        
+    }
+
 }

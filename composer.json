@@ -3,7 +3,7 @@
     "description": "Helper and base for MNHcC Zend Projects",
     "version": "0.4.1-dev",
     "type": "module",
-    "license": "GPL",
+    "license": "BSD",
     "tags": [
         "zend framework",
         "zf2",

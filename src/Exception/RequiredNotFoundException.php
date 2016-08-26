@@ -9,8 +9,15 @@
  * @license BSD
  */
 
-namespace MNHcC {
+namespace MNHcC\Exception {
 
-    return [
-    ];
+    /**
+     * Description of RequiredNotFoundException
+     *
+     * @author carschrotter
+     */
+    class RequiredNotFoundException extends LogicException {
+        
+    }
+
 }

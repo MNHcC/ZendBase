@@ -1,14 +1,18 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * MNHcC/ZendBase https://github.com/MNHcC/ZendBase
+ *
+ * @link      https://github.com/MNHcC/ZendBase for the canonical source repository
+ * @author MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+ * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+ * @license BSD
  */
 
 namespace MNHcC\Helper {
 
-    use \Zend\Stdlib\ArrayUtils as AU;
+    use Zend\Stdlib\ArrayUtils;
+    
     /**
      * ObjectHelper
      *
@@ -148,7 +152,7 @@ namespace MNHcC\Helper {
 		    $class = $parent;
 		    $i++;
 		}
-	    } catch (Exception $exc) {
+	    } catch (\Exception $exc) {
 		
 	    } finally {
 		return $asName ? $lastparent->getName() : $lastparent;

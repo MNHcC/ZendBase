@@ -1,27 +1,33 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * MNHcC/ZendBase https://github.com/MNHcC/ZendBase
+ *
+ * @link      https://github.com/MNHcC/ZendBase for the canonical source repository
+ * @author MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+ * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+ * @license BSD
  */
 
 namespace MNHcC\ModuleManager\Feature {
 
     use Zend\Loader\ClassMapAutoloader;
     use Zend\Loader\StandardAutoloader;
+    use MNHcC\Exception\RequiredNotFoundException;
     
     const DS = \DIRECTORY_SEPARATOR;
     
     /**
      * AutoloaderProviderTrait
-     *
-     * @author MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
-     * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
-     * @license default
+     * A trait for the modules implement the Autoload Interface.
      */
     trait AutoloaderProviderTrait {
 
+        /**
+         * 
+         * @return array
+         * @throws RequiredNotFoundException
+         */
 	public function getAutoloaderConfig() {
             $sourcefolder = false;
 	    $self_rfl = new \ReflectionObject($this);
@@ -38,7 +44,7 @@ namespace MNHcC\ModuleManager\Feature {
             }
             
             if(!$sourcefolder) {
-                throw new \LogicException('No sourcepath found');
+                throw new RequiredNotFoundException('No sourcepath found');
             }
 
             $config = [

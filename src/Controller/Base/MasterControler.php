@@ -1,13 +1,18 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * MNHcC/ZendBase https://github.com/MNHcC/ZendBase
+ *
+ * @link      https://github.com/MNHcC/ZendBase for the canonical source repository
+ * @author MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+ * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+ * @license BSD
  */
-namespace  MNHcC\Controller\Base { 
-    
+
+namespace MNHcC\Controller\Base {
+
     use Zend\Mvc\Controller\AbstractActionController;
+
     /**
      * MasterControler
      *
@@ -15,7 +20,9 @@ namespace  MNHcC\Controller\Base {
      * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
      * @license default
      */
-    abstract class MasterControler extends AbstractActionController implements MasterControlerInterface{
-	use MasterControlerTrait;
+    abstract class MasterControler extends AbstractActionController implements MasterControlerInterface {
+
+        use MasterControlerTrait;
     }
+
 }

@@ -1,9 +1,12 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * MNHcC/ZendBase https://github.com/MNHcC/ZendBase
+ *
+ * @link      https://github.com/MNHcC/ZendBase for the canonical source repository
+ * @author MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+ * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+ * @license BSD
  */
 
 namespace MNHcC\Helper {
@@ -16,13 +19,16 @@ namespace MNHcC\Helper {
      * @license default
      */
     trait ClassName {
-	public function getShortName(){
-	    return self::sN();
-	}
-	
-	static public function sN() {
-	    return (string) (new \ReflectionClass(__CLASS__))->getShortName();
-	}
+
+        public function getShortName() {
+            
+            return self::sN();
+        }
+
+        static public function sN() {
+            return (string) (new \ReflectionClass(__CLASS__))->getShortName();
+        }
+
     }
 
 }

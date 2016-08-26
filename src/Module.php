@@ -1,21 +1,22 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * MNHcC/ZendBase https://github.com/MNHcC/ZendBase
+ *
+ * @link      https://github.com/MNHcC/ZendBase for the canonical source repository
+ * @author MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+ * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+ * @license BSD
  */
 
 namespace MNHcC {
 
-    use Zend\ModuleManager\Feature\BootstrapListenerInterface;
     use Zend\EventManager\EventInterface;
-    use Zend\EventManager\EventManagerAwareInterface;
     use Zend\EventManager\EventManagerAwareTrait;
     use Zend\EventManager\EventManagerInterface;
     use Zend\Mvc\ApplicationInterface;
-    use Zend\ServiceManager\ServiceLocatorAwareInterface;
-    use Zend\ServiceManager\ServiceLocatorAwareTrait;
+    
+    use MNHcC\Zend3bcHelper\ServiceManager\ServiceLocatorAwareTrait;
     use MNHcC\Event\Listener\ModuleMatchListener;
     use MNHcC\Module\BasicModule;
 

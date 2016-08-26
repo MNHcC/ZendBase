@@ -1,15 +1,20 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * MNHcC/ZendBase https://github.com/MNHcC/ZendBase
+ *
+ * @link      https://github.com/MNHcC/ZendBase for the canonical source repository
+ * @author MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+ * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+ * @license BSD
  */
 
 namespace MNHcC\View\Helper {
 
-    use \Zend\View\Helper\AbstractHelper,
-	\Zend\Mvc\MvcEvent;
+    use Zend\View\Helper\AbstractHelper;
+    use Zend\Mvc\MvcEvent;
+    use Zend\Mvc\Router\RouteMatch;
+
     /**
      * RouteMatchViewHelper
      *
@@ -19,44 +24,48 @@ namespace MNHcC\View\Helper {
      */
     class RouteMatchViewHelper extends AbstractHelper {
 
-	/**
-	 *
-	 * @var MvcEvent 
-	 */
-	protected $mvcEvent;
+        /**
+         *
+         * @var MvcEvent 
+         */
+        protected $mvcEvent;
 
-	public function __construct(\Zend\Mvc\MvcEvent $mvcEvent) {
-	    // injecting the mvc event, since $mvcEvent->getRouteMatch() may be null
-	    $this->mvcEvent = $mvcEvent;
-	}
+        /**
+         * 
+         * @param MvcEvent $mvcEvent
+         */
+        public function __construct(MvcEvent $mvcEvent) {
+            // injecting the mvc event, since $mvcEvent->getRouteMatch() may be null
+            $this->mvcEvent = $mvcEvent;
+        }
 
-	/**
-	 * 
-	 * @return null|Router\RouteMatch
-	 */
-	public function __invoke() {
-	    return $this->getMvcEvent()->getRouteMatch();
-	}
-	
-	/**
-	 * 
-	 * @return MvcEvent
-	 */
-	public function getMvcEvent() {
-	    return $this->mvcEvent;
-	}
+        /**
+         * 
+         * @return null|RouteMatch null on failure or a instance of RouteMatch
+         */
+        public function __invoke() {
+            return $this->getMvcEvent()->getRouteMatch()
+                    ->getRouteMatch();
+        }
 
-	/**
-	 * 
-	 * @param MvcEvent $mvcEvent
-	 * @return \MNHcC\View\Helper\RouteMatchViewHelper
-	 */
-	public function setMvcEvent(MvcEvent $mvcEvent) {
-	    $this->mvcEvent = $mvcEvent;
-	    return $this;
-	}
+        /**
+         * 
+         * @return MvcEvent
+         */
+        public function getMvcEvent() {
+            return $this->mvcEvent;
+        }
 
-    	
+        /**
+         * 
+         * @param MvcEvent $mvcEvent
+         * @return $this
+         */
+        public function setMvcEvent(MvcEvent $mvcEvent) {
+            $this->mvcEvent = $mvcEvent;
+            return $this;
+        }
+
     }
 
 }

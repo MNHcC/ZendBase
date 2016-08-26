@@ -1,13 +1,16 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * MNHcC/ZendBase https://github.com/MNHcC/ZendBase
+ *
+ * @link      https://github.com/MNHcC/ZendBase for the canonical source repository
+ * @author MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+ * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+ * @license BSD
  */
 
 namespace MNHcC\Event\Mvc {
-    
+
     use \Zend\EventManager\EventInterface;
 
     /**
@@ -17,91 +20,92 @@ namespace MNHcC\Event\Mvc {
      * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
      * @license default
      */
-    Interface ModuleMatchEventInterface extends  EventInterface{
+    Interface ModuleMatchEventInterface extends EventInterface {
 
-	const EVENT_MODULE_MATCH = 'module.match';
-	const EVENT_BEFORE_MODULE_MATCH = 'before.module.match';
-	/**
-	 * 
-	 * @return string the name of Module
-	 */
-	public function getModuleName();
+        const EVENT_MODULE_MATCH = 'module.match';
+        const EVENT_BEFORE_MODULE_MATCH = 'before.module.match';
 
-	/**
-	 * 
-	 * @return Module the matched Module
-	 */
-	public function getModule();
+        /**
+         * 
+         * @return string the name of Module
+         */
+        public function getModuleName();
 
-	/**
-	 * Get application instance
-	 *
-	 * @return \Zend\Mvc\ApplicationInterface
-	 */
-	public function getApplication();
+        /**
+         * 
+         * @return Module the matched Module
+         */
+        public function getModule();
 
-	/**
-	 * Get router
-	 *
-	 * @return Router\RouteStackInterface
-	 */
-	public function getRouter();
+        /**
+         * Get application instance
+         *
+         * @return \Zend\Mvc\ApplicationInterface
+         */
+        public function getApplication();
 
-	/**
-	 * Get route match
-	 *
-	 * @return null|Router\RouteMatch
-	 */
-	public function getRouteMatch();
+        /**
+         * Get router
+         *
+         * @return Router\RouteStackInterface
+         */
+        public function getRouter();
 
-	/**
-	 * Get request
-	 *
-	 * @return \Zend\Http\Request
-	 */
-	public function getRequest();
+        /**
+         * Get route match
+         *
+         * @return null|Router\RouteMatch
+         */
+        public function getRouteMatch();
 
-	/**
-	 * Get response
-	 *
-	 * @return \Zend\Stdlib\Response
-	 */
-	public function getResponse();
+        /**
+         * Get request
+         *
+         * @return \Zend\Http\Request
+         */
+        public function getRequest();
 
-	/**
-	 * Get the view model
-	 *
-	 * @return Model
-	 */
-	public function getViewModel();
+        /**
+         * Get response
+         *
+         * @return \Zend\Stdlib\Response
+         */
+        public function getResponse();
 
-	/**
-	 * Get result
-	 *
-	 * @return mixed
-	 */
-	public function getResult();
+        /**
+         * Get the view model
+         *
+         * @return Model
+         */
+        public function getViewModel();
 
-	/**
-	 * Retrieve the error message, if any
-	 *
-	 * @return string
-	 */
-	public function getError();
+        /**
+         * Get result
+         *
+         * @return mixed
+         */
+        public function getResult();
 
-	/**
-	 * Get the currently registered controller name
-	 *
-	 * @return string
-	 */
-	public function getController();
+        /**
+         * Retrieve the error message, if any
+         *
+         * @return string
+         */
+        public function getError();
 
-	/**
-	 * Get controller class
-	 *
-	 * @return string
-	 */
-	public function getControllerClass();
+        /**
+         * Get the currently registered controller name
+         *
+         * @return string
+         */
+        public function getController();
+
+        /**
+         * Get controller class
+         *
+         * @return string
+         */
+        public function getControllerClass();
     }
 
 }

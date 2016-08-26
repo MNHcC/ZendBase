@@ -1,10 +1,20 @@
 <?php
 
+/**
+ * MNHcC/ZendBase https://github.com/MNHcC/ZendBase
+ *
+ * @link      https://github.com/MNHcC/ZendBase for the canonical source repository
+ * @author MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+ * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+ * @license BSD
+ */
+
 namespace MNHcC\Module {
 
     use Zend\ModuleManager\Feature\BootstrapListenerInterface;
     use Zend\EventManager\EventManagerAwareInterface;
-    use Zend\ServiceManager\ServiceLocatorAwareInterface; //use from zf2 or on zf3 from MNHcC\Zend3bcHelper
+    use Zend\Mvc\ApplicationInterface;
+    use MNHcC\Zend3bcHelper\ServiceManager\ServiceLocatorAwareInterface; //use from MNHcC\Zend3bcHelper for fixing removed from zf3
 
     /**
      * Description of BasicModuleInterface
@@ -24,7 +34,7 @@ namespace MNHcC\Module {
 	 * @param \Zend\Mvc\ApplicationInterface $application
 	 * @return static
 	 */
-	public function setApplication(\Zend\Mvc\ApplicationInterface $application);
+	public function setApplication(ApplicationInterface $application);
     }
 
 }
