@@ -43,6 +43,7 @@ namespace MNHcC\Controller\Base {
 
         /**
          * 
+         * @deprecated since version 0.4.3-dev
          * @param array $viewModelParms
          * @return ViewModel
          */
