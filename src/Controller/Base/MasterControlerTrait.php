@@ -11,6 +11,12 @@
 
 namespace MNHcC\Controller\Base {
 
+    use Zend\View\Model\ModelInterface;
+    use Zend\View\Model\ViewModel;
+    use Zend\Stdlib\ArrayUtils;
+    use MNHcC\Controller\Base\MasterControlerInterface;
+    use Zend\Mvc\Controller\AbstractActionController;
+
     /**
      * MasterControlerTrait
      *
@@ -21,45 +27,56 @@ namespace MNHcC\Controller\Base {
     trait MasterControlerTrait {
 
         protected $viewModelParms = [];
-
+        protected $viewClass = ViewModel::class;
+     
+        /**
+         * 
+         * {@inheritDoc}
+         * Override of AbstractActionController::notFoundAction()
+         */
         public function notFoundAction() {
-
-            /* @var $result \Zend\View\Model\ViewModel */
+            /* @var $result ViewModel */
             $result = parent::notFoundAction();
             $result->setVariables($this->getViewModelParms(), false);
             return $result;
         }
 
-        public function onDispatch(\Zend\Mvc\MvcEvent $e) {
-            return parent::onDispatch($e);
-        }
-
         /**
          * 
          * @param array $viewModelParms
-         * @return \Zend\View\Model\ViewModel
+         * @return ViewModel
          */
         public function getDefaultView(array $viewModelParms = []) {
-            return new \Zend\View\Model\ViewModel($this->getViewModelParms($viewModelParms));
+            trigger_error(sprintf('%s is deprecated please use %s::createView', __METHOD__, static::class), E_USER_DEPRECATED);
+            return new ViewModel($this->getViewModelParms($viewModelParms));
         }
 
         /**
          * 
-         * @param array $parms
-         * @return array
+         * {@inheritDoc}
+         * Implementation of MasterControlerInterface::createView()
          */
-        public function getViewModelParms(array $parms = []) {
-            return array_merge($this->viewModelParms, $parms);
+        public function createView($viewModelParms = []) {
+            $viewClass = $this->getViewClass();
+            return new $viewClass($this->getViewModelParms($this->viewToArray($viewModelParms)));
         }
 
         /**
          * 
-         * @param array $viewModelParms
-         * @param bool $overide
-         * @return static
+         * {@inheritDoc}
+         * Implementation of MasterControlerInterface::getViewModelParms()
          */
-        public function setViewModelParms(array $viewModelParms, $overide = false) {
-            if ($overide) {
+        public function getViewModelParms($parms = []) {
+            return array_merge($this->viewModelParms, $this->viewToArray($parms));
+        }
+
+        /**
+         * 
+         * {@inheritDoc}
+         * Implementation of MasterControlerInterface::setViewModelParms()
+         */
+        public function setViewModelParms($viewModelParms, $override = false) {
+            if ($override) {
                 $this->viewModelParms = $viewModelParms;
             } else {
                 $this->viewModelParms = array_merge($this->viewModelParms, $viewModelParms);
@@ -69,29 +86,55 @@ namespace MNHcC\Controller\Base {
 
         /**
          * 
-         * @param \Zend\View\Model\ViewModel|\Traversable|array $view
-         * @return array
-         * @throws \InvalidArgumentException
+         * {@inheritDoc}
+         * Implementation of MasterControlerInterface::viewToArray()
          */
         public function viewToArray($view) {
-            if (is_array($view)) {
-                return $view;
-            } elseif ($view instanceof \Zend\View\Model\ViewModel) {
-                return $view->getVariables();
-            } elseif ($view instanceof \Traversable) {
-                return \Zend\Stdlib\ArrayUtils::iteratorToArray($view);
+            if ($this->isView($view)) {
+                if (is_array($view)) {
+                    /* @var $view array */
+                    return $view;
+                } elseif ($view instanceof ModelInterface) {
+                    /* @var $view ModelInterface */
+                    return $view->getVariables();
+                } elseif ($view instanceof \Traversable) {
+                    /* @var $view \Traversable */
+                    return ArrayUtils::iteratorToArray($view);
+                }
+            } else {
+                /* @ToDo Replace Exeption */
+                throw new \InvalidArgumentException(sprintf('View must be one of these types: "%s"|"%s"|"array". "%s" given', ViewModel::class, \Traversable::class, is_object($view) ? get_class($view) : gettype($view)));
             }
-            /* @ToDo Replace Exeption */
-            throw new \InvalidArgumentException(sprintf('View must be one of these types: "%s"|"%s"|"array". "%s" given', \Zend\View\Model\ViewModel::class, \Traversable::class, is_object($view) ? get_class($view) : gettype($view)));
         }
 
         /**
          * 
-         * @param mixed $view
-         * @return boolean
+         * {@inheritDoc}
+         * Implementation of MasterControlerInterface::isView()
          */
         public function isView($view) {
-            return (bool) (is_array($view) || $view instanceof \Zend\View\Model\ViewModel || $view instanceof \Traversable);
+            return (bool) (is_array($view) || $view instanceof ModelInterface || $view instanceof \Traversable);
+        }
+
+        /**
+         * 
+         * @return string the class of view and subclass of ModelInterface
+         */
+        public function getViewClass() {
+            return $this->viewClass;
+        }
+
+        /**
+         * 
+         * {@inheritDoc}
+         * Implementation of MasterControlerInterface::setViewClass()
+         */
+        public function setViewClass($viewClass) {
+            if (is_subclass_of($viewClass, ModelInterface::class)) {
+                throw new \InvalidArgumentException(sprintf('view class must a subclass of %s. %s given!', ModelInterface::class, $viewClass));
+            }
+            $this->viewClass = $viewClass;
+            return $this;
         }
 
     }

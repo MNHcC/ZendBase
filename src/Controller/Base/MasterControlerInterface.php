@@ -5,48 +5,53 @@
  *
  * @link      https://github.com/MNHcC/ZendBase for the canonical source repository
  * @author MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
- * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+ * @copyright 2015-2016, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
  * @license BSD
  */
 
 namespace MNHcC\Controller\Base {
 
     use Zend\View\Model\ViewModel;
-
+    use Zend\View\Model\ModelInterface;
+    
     /**
      * MasterControler
      *
      * @author MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
-     * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
-     * @license default
+     * @copyright 2015-2016, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+     * @license BSD
      */
     Interface MasterControlerInterface {
 
         /**
          * 
-         * @param array $parms
+         * @param string $viewClass the class of view and subclass of ModelInterface
+         * @return $this
+         * @throws \InvalidArgumentException
+         */
+        public function setViewClass($viewClass);
+        
+        
+        /**
+         * 
+         * @param ModelInterface|\Traversable|array $parms
          * @return array
+         * @throws \InvalidArgumentException
          */
-        public function getViewModelParms(array $parms = []);
+        public function getViewModelParms($parms = []);
 
         /**
          * 
-         * @param array $viewModelParms
-         * @param bool $overide
-         * @return static
+         * @param ModelInterface|\Traversable|array $viewModelParms
+         * @param bool $override
+         * @return $this
+         * @throws \InvalidArgumentException
          */
-        public function setViewModelParms(array $viewModelParms, $overide = false);
+        public function setViewModelParms($viewModelParms, $override = false);
 
         /**
          * 
-         * @param array $viewModelParms
-         * @return ViewModel
-         */
-        public function getDefaultView(array $viewModelParms = []);
-
-        /**
-         * 
-         * @param \Zend\View\Model\ViewModel|\Traversable|array $view
+         * @param ModelInterface|\Traversable|array $view
          * @return array
          * @throws \InvalidArgumentException
          */
@@ -58,6 +63,14 @@ namespace MNHcC\Controller\Base {
          * @return boolean
          */
         public function isView($view);
+        
+        
+        /**
+         * 
+         * @param ModelInterface|\Traversable|array $viewModelParms
+         * @return ModelInterface
+         */
+        public function createView($viewModelParms = []);
     }
 
 }

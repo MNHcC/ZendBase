@@ -21,7 +21,7 @@ namespace MNHcC\Controller\Base {
      * @license default
      */
     abstract class MasterControler extends AbstractActionController implements MasterControlerInterface {
-
+        
         use MasterControlerTrait;
     }
 
