@@ -12,6 +12,8 @@
 namespace MNHcC\Controller\Base {
 
     use Zend\Mvc\Controller\AbstractActionController;
+    use MNHcC\Zend3bcHelper\ServiceManager\ServiceLocatorAwareTrait;
+    use MNHcC\Zend3bcHelper\ServiceManager\ServiceLocatorAwareControllerInterface;
 
     /**
      * MasterControler
@@ -20,9 +22,9 @@ namespace MNHcC\Controller\Base {
      * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
      * @license default
      */
-    abstract class MasterControler extends AbstractActionController implements MasterControlerInterface {
-        
+    abstract class AbstractBaseControler extends AbstractActionController implements MasterControlerInterface, ServiceLocatorAwareControllerInterface {
         use MasterControlerTrait;
+        use ServiceLocatorAwareTrait;
     }
 
 }

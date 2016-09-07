@@ -55,7 +55,6 @@ namespace MNHcC\Controller\Base {
         /**
          * 
          * {@inheritDoc}
-         * Implementation of MasterControlerInterface::createView()
          */
         public function createView($viewModelParms = []) {
             $viewClass = $this->getViewClass();
