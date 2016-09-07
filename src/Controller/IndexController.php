@@ -9,13 +9,14 @@
 
 namespace MNHcC\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
 
-class IndexController extends AbstractActionController
+/**
+ * IndexController is a example implementation of the AbstractBaseController
+ */
+class IndexController extends Base\AbstractBaseController
 {
     public function indexAction()
     {
-        return new ViewModel();
+        return $this->createView(['message'=>'Hello World!']);
     }
 }
