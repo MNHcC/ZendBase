@@ -13,19 +13,20 @@ namespace MNHcC\Controller\Base {
 
     trigger_error(sprintf(
             '%s is deprecated and will be removed in version 1.0.*. '
-            . 'Please update your code to implement %s interface.', 
-            MasterControlerInterface::class, 
-            AbstractBaseControllerInterface::class
+            . 'Please update your code to use %s as parent class.', 
+            MasterControler::class, 
+            AbstractBaseController::class
     ), E_USER_DEPRECATED);
-        
+
     /**
-     * MasterControlerInterface
+     * MasterControler
      *
      * @author MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
      * @copyright 2015-2016, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
      * @license BSD
+     * @deprecated since version 0.5.4-dev
      */
-    Interface MasterControlerInterface extends AbstractBaseControllerInterface {
+    class MasterControler extends AbstractBaseController {
         
     }
 
