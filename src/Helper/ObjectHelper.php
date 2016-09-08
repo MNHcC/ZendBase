@@ -132,43 +132,46 @@ namespace MNHcC\Helper {
 	/**
 	 * 
 	 * @param object|string $childclass object or classname
-	 * @param int $recrsusion
+	 * @param int $appearance_deep
 	 * @param bool $asName
-	 * @return \ReflectionClass|string
-	 */
-	static public function getGrandparentClass($childclass, $recrsusion = 2, $asName = true) {
-	    if (is_object($childclass)) {
-		$childclass = get_class($childclass);
-	    }
-	    $lastparent = $class = new \ReflectionClass($childclass);
+         * @return string|\ReflectionClass
+         * @throws \InvalidArgumentException
+         * @throws \UnderflowException
+         * @throws \ReflectionException
+         */
+	static public function getGrandparentClass($childclass, $appearance_deep = 2, $asName = true) {
+            
+            if(!is_string($childclass) && !is_object($childclass)) {
+                throw new \InvalidArgumentException(sprintf('Argument 1 (childclass) passed to %s must be greater than 1 type of object or string, %s given', __METHOD__, gettype($childclass)));
+            } elseif ($appearance_deep <= 1) {
+                 throw new \UnderflowException(sprintf('Argument 2 (appearance_deep) passed to %s must be greater than 2', __METHOD__));
+            }
+            /*@var $last_parent_class \ReflectionClass */
+	    $last_parent_class = new \ReflectionClass($childclass);
 	    $i=1;
 	    try {
-		while (($parent = $class->getParentClass())) {
-		    if($recrsusion > 0 && $recrsusion < $i){
-			 break; 
-		    }
-		    $parent->recrsusionLevel = $i;
-		    $lastparent = $parent;
-		    $class = $parent;
+		while ( $appearance_deep < $i && ($current_parent_class = $last_parent_class->getParentClass()) ) {
+		    $current_parent_class->appearanceDeep  = $current_parent_class->recrsusionLevel = $i;
+		    $last_parent_class = $current_parent_class;
 		    $i++;
 		}
 	    } catch (\Exception $exc) {
 		
 	    } finally {
-		return $asName ? $lastparent->getName() : $lastparent;
+		return $asName ? $last_parent_class->getName() : $last_parent_class;
 	    }
 	}
 	
 	/**
 	 * @param string $method
 	 * @param object $childclass
-	 * @param int $recrsusion
+	 * @param int $appearance_deep
 	 * @return \Closure
 	 */
 	static public function getGrandparentClosure($method, $childclass,
-		$recrsusion = 2) {
+		$appearance_deep = 2) {
 	    /* @var $class \ReflectionClass */
-	    $class = static::getGrandparentClass($childclass, $recrsusion, false);
+	    $class = static::getGrandparentClass($childclass, $appearance_deep, false);
 	    
 	    return $class->getMethod($method)->getClosure($childclass);
 	}
