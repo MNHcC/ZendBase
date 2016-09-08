@@ -44,8 +44,8 @@ namespace MNHcC\View\Helper {
          * @return null|RouteMatch null on failure or a instance of RouteMatch
          */
         public function __invoke() {
-            return $this->getMvcEvent()->getRouteMatch()
-                    ->getRouteMatch();
+            return $this->getMvcEvent()->getRouteMatch();
+                    //->getRouteMatch();
         }
 
         /**

@@ -25,13 +25,13 @@ namespace MNHcC\Module {
         
 	/**
 	 * 
-	 * @return \Zend\Mvc\ApplicationInterface
+	 * @return ApplicationInterface
 	 */
 	public function getApplication();
 
 	/**
 	 * 
-	 * @param \Zend\Mvc\ApplicationInterface $application
+	 * @param ApplicationInterface $application
 	 * @return static
 	 */
 	public function setApplication(ApplicationInterface $application);
