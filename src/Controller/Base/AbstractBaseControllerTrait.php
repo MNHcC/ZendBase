@@ -14,8 +14,11 @@ namespace MNHcC\Controller\Base {
     use Zend\View\Model\ModelInterface;
     use Zend\View\Model\ViewModel;
     use Zend\Stdlib\ArrayUtils;
-    use MNHcC\Controller\Base\MasterControlerInterface;
-    use Zend\Mvc\Controller\AbstractActionController;
+    use Zend\ServiceManager\ServiceLocatorInterface;
+    use Zend\ServiceManager\AbstractPluginManager;
+    use Zend\ServiceManager\ServiceManagerAwareInterface;
+    use Zend\ServiceManager\ServiceLocatorAwareInterface;
+    use MNHcC\Zend3bcHelper\ServiceManager\ServiceLocatorAwareControllerInterface;
 
     /**
      * MasterControlerTrait
@@ -28,7 +31,7 @@ namespace MNHcC\Controller\Base {
 
         protected $viewModelParms = [];
         protected $viewClass = ViewModel::class;
-     
+
         /**
          * 
          * {@inheritDoc}
@@ -135,6 +138,50 @@ namespace MNHcC\Controller\Base {
             }
             $this->viewClass = $viewClass;
             return $this;
+        }
+
+        /**
+         * get the main ServiceLocator when a PluginManager is used
+         * @return ServiceLocatorInterface
+         * @throws \BadMethodCallException
+         * @throws \LogicException
+         */
+        public function getMainServicelocator() {
+            if (!$this->hasServicelocator()) {
+                throw new \BadMethodCallException( sprintf('Called a trait implemented method %s in %s thats require a getServiceLocator() method.' . PHP_EOL
+                        . 'Implement one of this interfaces %s, %s or %s', 
+                        __METHOD__, 
+                        self::class, 
+                        ServiceLocatorAwareInterface::class, 
+                        ServiceLocatorAwareControllerInterface::class, 
+                        ServiceManagerAwareInterface::class) );
+            }
+
+            if ($this instanceof ServiceManagerAwareInterface) {
+                $sm = $this->getServiceManager();
+            } else {
+                $sm = $this->getServiceLocator();
+            }
+            if ($sm instanceof AbstractPluginManager) {
+                $sm = $sm->getServiceLocator(); //get original
+            }
+            if(! $sm instanceof ServiceLocatorInterface){
+                throw new \LogicException(sprintf('No ServiceLocator found! ServiceLocator musst from type %s, %s is given.'. PHP_EOL
+                        . 'Is the controller initialized?', ServiceLocatorAwareInterface::class, (is_object($sm) ? get_class($sm) : gettype($sm)) ));
+            }
+            return $sm;
+        }
+
+        /**
+         * check is ServiceLocator available
+         * runn this for examble before call getMainServicelocator()
+         * @return boolean
+         */
+        public function hasServicelocator() {
+            return ($this instanceof ServiceLocatorAwareInterface 
+                    || $this instanceof ServiceLocatorAwareControllerInterface 
+                    || ($this instanceof ServiceManagerAwareInterface && method_exists($this, 'getServiceManager'))
+                    || method_exists($this, 'getServiceLocator'));
         }
 
     }

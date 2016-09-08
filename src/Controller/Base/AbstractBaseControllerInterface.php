@@ -70,6 +70,19 @@ namespace MNHcC\Controller\Base {
          * @return ModelInterface
          */
         public function createView($viewModelParms = []);
+        
+        /**
+         * get the main ServiceLocator when a PluginManager is used
+         * @return ServiceLocatorInterface
+         */
+        public function getMainServicelocator();
+        
+        /**
+         * check is ServiceLocator available
+         * runn this for examble before call getMainServicelocator()
+         * @return boolean
+         */
+        public function hasServicelocator();
     }
 
 }
