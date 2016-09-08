@@ -5,59 +5,28 @@
  *
  * @link      https://github.com/MNHcC/ZendBase for the canonical source repository
  * @author MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
- * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+ * @copyright 2015-2016, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
  * @license BSD
  */
 
 namespace MNHcC\Controller\Base {
 
-    use Zend\View\Model\ViewModel;
-
+    trigger_error(sprintf(
+            '%s is deprecated and will be removed in version 1.0.*. '
+            . 'Please update your code to implement %s interface.', 
+            MasterControlerInterface::class, 
+            AbstractBaseControllerInterface::class
+    ), E_USER_DEPRECATED);
+        
     /**
-     * MasterControler
+     * MasterControlerInterface
      *
      * @author MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
-     * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
-     * @license default
+     * @copyright 2015-2016, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+     * @license BSD
      */
-    Interface MasterControlerInterface {
-
-        /**
-         * 
-         * @param array $parms
-         * @return array
-         */
-        public function getViewModelParms(array $parms = []);
-
-        /**
-         * 
-         * @param array $viewModelParms
-         * @param bool $overide
-         * @return static
-         */
-        public function setViewModelParms(array $viewModelParms, $overide = false);
-
-        /**
-         * 
-         * @param array $viewModelParms
-         * @return ViewModel
-         */
-        public function getDefaultView(array $viewModelParms = []);
-
-        /**
-         * 
-         * @param \Zend\View\Model\ViewModel|\Traversable|array $view
-         * @return array
-         * @throws \InvalidArgumentException
-         */
-        public function viewToArray($view);
-
-        /**
-         * 
-         * @param mixed $view
-         * @return boolean
-         */
-        public function isView($view);
+    Interface MasterControlerInterface extends AbstractBaseControllerInterface {
+        
     }
 
 }

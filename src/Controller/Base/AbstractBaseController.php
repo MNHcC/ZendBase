@@ -11,24 +11,20 @@
 
 namespace MNHcC\Controller\Base {
 
-    trigger_error(sprintf(
-            '%s is deprecated and will be removed in version 1.0.*. '
-            . 'Please update your code to use the %s trait', 
-            MasterControlerTrait::class, 
-            AbstractBaseControllerTrait::class
-    ), E_USER_DEPRECATED);
-    
+    use Zend\Mvc\Controller\AbstractActionController;
+    use MNHcC\Zend3bcHelper\ServiceManager\ServiceLocatorAwareTrait;
+    use MNHcC\Zend3bcHelper\ServiceManager\ServiceLocatorAwareControllerInterface;
+
     /**
-     * MasterControlerTrait
+     * AbstractBaseController
      *
      * @author MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
      * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
      * @license default
      */
-    trait MasterControlerTrait {
-
+    abstract class AbstractBaseController extends AbstractActionController implements AbstractBaseControllerInterface, ServiceLocatorAwareControllerInterface {
         use AbstractBaseControllerTrait;
-        
+        use ServiceLocatorAwareTrait;
     }
 
 }

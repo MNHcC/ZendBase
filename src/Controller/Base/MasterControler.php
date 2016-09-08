@@ -5,24 +5,29 @@
  *
  * @link      https://github.com/MNHcC/ZendBase for the canonical source repository
  * @author MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
- * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+ * @copyright 2015-2016, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
  * @license BSD
  */
 
 namespace MNHcC\Controller\Base {
 
-    use Zend\Mvc\Controller\AbstractActionController;
+    trigger_error(sprintf(
+            '%s is deprecated and will be removed in version 1.0.*. '
+            . 'Please update your code to use %s as parent class.', 
+            MasterControler::class, 
+            AbstractBaseController::class
+    ), E_USER_DEPRECATED);
 
     /**
      * MasterControler
      *
      * @author MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
-     * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
-     * @license default
+     * @copyright 2015-2016, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
+     * @license BSD
+     * @deprecated since version 0.5.4-dev
      */
-    abstract class MasterControler extends AbstractActionController implements MasterControlerInterface {
-
-        use MasterControlerTrait;
+    class MasterControler extends AbstractBaseController {
+        
     }
 
 }
