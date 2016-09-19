@@ -13,6 +13,8 @@ namespace MNHcC {
 
     use Zend\EventManager\EventInterface;
     use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
+    use Zend\View\HelperPluginManager as ViewHelperPluginManager;
+    use MNHcC\View\Helper\RouteMatchViewHelper;
     use MNHcC\Module\BasicModule;
 
     /**
@@ -42,8 +44,12 @@ namespace MNHcC {
 
         public function getViewHelperConfig() {
             return [
-                'factory' => ['routeMatch', function($sm) {
-                        return new View\Helper\RouteMatchViewHelper($sm);
+                'factories' => [
+                    'routeMatch' => function(ViewHelperPluginManager $sm) {
+                        return new RouteMatchViewHelper($sm, $sm->getServiceLocator()
+                                        ->get('Application')
+                                        ->getMvcEvent()
+                        );
                     }],
             ];
         }
