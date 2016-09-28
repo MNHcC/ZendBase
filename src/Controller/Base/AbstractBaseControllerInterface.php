@@ -26,7 +26,6 @@ namespace MNHcC\Controller\Base {
          * 
          * @param string $viewClass the class of view and subclass of ModelInterface
          * @return $this
-         * @throws \InvalidArgumentException
          */
         public function setViewClass($viewClass);
         
@@ -35,7 +34,6 @@ namespace MNHcC\Controller\Base {
          * 
          * @param ModelInterface|\Traversable|array $parms
          * @return array
-         * @throws \InvalidArgumentException
          */
         public function getViewModelParms($parms = []);
 
@@ -44,7 +42,6 @@ namespace MNHcC\Controller\Base {
          * @param ModelInterface|\Traversable|array $viewModelParms
          * @param bool $override
          * @return $this
-         * @throws \InvalidArgumentException
          */
         public function setViewModelParms($viewModelParms, $override = false);
 
@@ -52,7 +49,6 @@ namespace MNHcC\Controller\Base {
          * 
          * @param ModelInterface|\Traversable|array $view
          * @return array
-         * @throws \InvalidArgumentException
          */
         public function viewToArray($view);
 
