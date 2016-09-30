@@ -146,7 +146,7 @@ namespace MNHcC\Controller\Base {
          * @throws \InvalidArgumentException
          */
         public function setViewClass($viewClass) {
-            if (is_subclass_of($viewClass, ModelInterface::class)) {
+            if (!is_subclass_of($viewClass, ModelInterface::class)) {
                 throw new \InvalidArgumentException(sprintf('view class must a subclass of %s. %s given!', ModelInterface::class, $viewClass));
             }
             $this->viewClass = $viewClass;
