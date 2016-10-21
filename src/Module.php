@@ -42,9 +42,11 @@ namespace MNHcC {
 
         public function getViewHelperConfig() {
             return [
-                'factory' => ['routeMatch', function($sm) {
+                'factory' => [
+                    'routeMatch', function($sm) {
                         return new View\Helper\RouteMatchViewHelper($sm);
-                    }],
+                    }
+                ],
             ];
         }
 
