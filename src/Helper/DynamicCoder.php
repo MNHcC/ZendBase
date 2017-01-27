@@ -47,12 +47,18 @@ namespace MNHcC\Helper {
         }
 
         /**
-         * 
+         * Convert a CameCase string to underscore seperated string
+         * <code>
+         * <?php
+         * \MNHcC\Helper\DynamicCoder::fromCamelCaseToUnderscore('CamelCaseString'); //return camel_case_string
+         * \MNHcC\Helper\DynamicCoder::fromCamelCaseToUnderscore('CamelCaseString', '-'); //return camel-case-string
+         * </code>
          * @param string $name the name or key to underscore
+         * @param string $underscore (optional) default '_' You can change optional the underscore to another sing for example a hyphen (-)
          * @return string the underscored name
          */
-        static public function fromCamelCaseToUnderscore($name) {
-            return \strtolower(\preg_replace('/([a-z])([A-Z])/', '$1_$2', $name));
+        static public function fromCamelCaseToUnderscore($name, $underscore = '_') {
+            return \strtolower(\preg_replace('/([a-z])([A-Z])/', '$1'.$underscore.'$2', $name));
         }
 
     }
