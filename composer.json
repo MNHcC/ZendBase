@@ -1,7 +1,7 @@
 {
     "name": "mnhcc/zendbase",
     "description": "Helper and base for MNHcC Zend Projects",
-    "version": "0.5.5-dev",
+    "version": "0.5.6-dev",
     "type": "module",
     "license": "BSD",
     "tags": [
@@ -19,7 +19,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.5.5-dev"
+            "dev-master": "0.5.6-dev"
         }
     },
     "source": {
