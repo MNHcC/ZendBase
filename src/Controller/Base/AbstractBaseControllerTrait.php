@@ -25,7 +25,7 @@ namespace MNHcC\Controller\Base {
      *
      * @author MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
      * @copyright 2015, MNHcC  - Michael Hegenbarth (carschrotter) <mnh@mn-hegenbarth.de>
-     * @license default
+     * @license BSD
      */
     trait AbstractBaseControllerTrait {
 
@@ -55,42 +55,54 @@ namespace MNHcC\Controller\Base {
             return new ViewModel($this->getViewModelParms($viewModelParms));
         }
 
-        /**
+         /**
          * 
-         * {@inheritDoc}
+         * @param ModelInterface|\Traversable|array $viewModelParms
+         * @return ModelInterface
          */
         public function createView($viewModelParms = []) {
             $viewClass = $this->getViewClass();
             return new $viewClass($this->getViewModelParms($this->viewToArray($viewModelParms)));
         }
+        
 
-        /**
+       /**
          * 
-         * {@inheritDoc}
-         * Implementation of MasterControlerInterface::getViewModelParms()
+         * @param ModelInterface|\Traversable|array $parms
+         * @return array
+         * @throws \InvalidArgumentException
          */
         public function getViewModelParms($parms = []) {
-            return array_merge($this->viewModelParms, $this->viewToArray($parms));
+            try {
+               $retVal = array_merge($this->viewModelParms, $this->viewToArray($parms)); 
+            } catch (\InvalidArgumentException $exc) {
+                throw new \InvalidArgumentException($exc->getMessage(), $exc->getCode(), $exc);;
+            } finally {
+                return $retVal;
+            }
         }
 
         /**
          * 
-         * {@inheritDoc}
-         * Implementation of MasterControlerInterface::setViewModelParms()
+         * @param ModelInterface|\Traversable|array $viewModelParms
+         * @param bool $override
+         * @return $this
+         * @throws \InvalidArgumentException
          */
         public function setViewModelParms($viewModelParms, $override = false) {
             if ($override) {
-                $this->viewModelParms = $viewModelParms;
+                $this->viewModelParms = $this->viewToArray($viewModelParms);
             } else {
-                $this->viewModelParms = array_merge($this->viewModelParms, $viewModelParms);
+                $this->viewModelParms = array_merge($this->viewModelParms, $this->viewToArray($viewModelParms));
             }
             return $this;
         }
 
         /**
          * 
-         * {@inheritDoc}
-         * Implementation of MasterControlerInterface::viewToArray()
+         * @param ModelInterface|\Traversable|array $view
+         * @return array
+         * @throws \InvalidArgumentException
          */
         public function viewToArray($view) {
             if ($this->isView($view)) {
@@ -112,8 +124,8 @@ namespace MNHcC\Controller\Base {
 
         /**
          * 
-         * {@inheritDoc}
-         * Implementation of MasterControlerInterface::isView()
+         * @param mixed $view
+         * @return boolean
          */
         public function isView($view) {
             return (bool) (is_array($view) || $view instanceof ModelInterface || $view instanceof \Traversable);
@@ -129,11 +141,12 @@ namespace MNHcC\Controller\Base {
 
         /**
          * 
-         * {@inheritDoc}
-         * Implementation of MasterControlerInterface::setViewClass()
+         * @param string $viewClass the class of view and subclass of ModelInterface
+         * @return $this
+         * @throws \InvalidArgumentException
          */
         public function setViewClass($viewClass) {
-            if (is_subclass_of($viewClass, ModelInterface::class)) {
+            if (!is_subclass_of($viewClass, ModelInterface::class)) {
                 throw new \InvalidArgumentException(sprintf('view class must a subclass of %s. %s given!', ModelInterface::class, $viewClass));
             }
             $this->viewClass = $viewClass;

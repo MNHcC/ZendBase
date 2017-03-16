@@ -13,6 +13,8 @@ namespace MNHcC {
 
     use Zend\EventManager\EventInterface;
     use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
+    use Zend\View\HelperPluginManager as ViewHelperPluginManager;
+    use MNHcC\View\Helper\RouteMatchViewHelper;
     use MNHcC\Module\BasicModule;
 
     /**

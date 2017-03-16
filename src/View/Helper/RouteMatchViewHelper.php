@@ -14,6 +14,7 @@ namespace MNHcC\View\Helper {
     use Zend\View\Helper\AbstractHelper;
     use Zend\Mvc\MvcEvent;
     use Zend\Mvc\Router\RouteMatch;
+    use Zend\View\HelperPluginManager;
 
     /**
      * RouteMatchViewHelper
@@ -34,7 +35,8 @@ namespace MNHcC\View\Helper {
          * 
          * @param MvcEvent $mvcEvent
          */
-        public function __construct(MvcEvent $mvcEvent) {
+        public function __construct(HelperPluginManager $sm, MvcEvent $mvcEvent) {
+           //die(\Kint::dump($sm->get('url')));
             // injecting the mvc event, since $mvcEvent->getRouteMatch() may be null
             $this->mvcEvent = $mvcEvent;
         }
