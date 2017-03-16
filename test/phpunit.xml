@@ -5,7 +5,7 @@
 >
     <testsuites>
         <testsuite name="Test MNHcC ZendBase">
-            <directory>;./</directory>
+            <directory>src</directory>
         </testsuite>
     </testsuites>
 </phpunit>

@@ -15,8 +15,6 @@ if (php_sapi_name() === 'cli-server') {
 // Setup autoloading
 require 'init_autoloader.php';
 
-//echo 'class_exists(MNHcC\Zend3bcHelper\Module::class, false): '. (class_exists(MNHcC\Module::class, false) ? 'JA' : 'NEIN') . PHP_EOL;
-//echo 'class_exists(MNHcC\Zend3bcHelper\Module::class, true): '. (class_exists(MNHcC\Module::class, true) ? 'JA' : 'NEIN') . PHP_EOL;
 $configuration = include 'config/application.config.php';
 $moduleLoader = new ModuleLoader($configuration);
 /* @var $serviceManager ServiceManager */

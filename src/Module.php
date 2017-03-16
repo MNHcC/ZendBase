@@ -45,13 +45,12 @@ namespace MNHcC {
         public function getViewHelperConfig() {
             return [
                 'factories' => [
-                    'routeMatch', function($sm) {
-                        return new View\Helper\RouteMatchViewHelper($sm, $sm->getServiceLocator()
+                    'routeMatch' => function(ViewHelperPluginManager $sm) {
+                        return new RouteMatchViewHelper($sm, $sm->getServiceLocator()
                                         ->get('Application')
                                         ->getMvcEvent()
                         );
-                    }
-                ],
+                    }],
             ];
         }
 
