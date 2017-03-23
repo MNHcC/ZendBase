@@ -35,7 +35,7 @@ namespace MNHcC\View\Helper {
          * 
          * @param MvcEvent $mvcEvent
          */
-        public function __construct(HelperPluginManager $sm, MvcEvent $mvcEvent) {
+        public function __construct($sm, MvcEvent $mvcEvent) {
            //die(\Kint::dump($sm->get('url')));
             // injecting the mvc event, since $mvcEvent->getRouteMatch() may be null
             $this->mvcEvent = $mvcEvent;

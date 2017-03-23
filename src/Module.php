@@ -45,11 +45,17 @@ namespace MNHcC {
         public function getViewHelperConfig() {
             return [
                 'factories' => [
-                    'routeMatch' => function(ViewHelperPluginManager $sm) {
-                        return new RouteMatchViewHelper($sm, $sm->getServiceLocator()
+                    'routeMatch' => function(\Zend\ServiceManager\ServiceLocatorInterface $sm) {
+                        if($sm instanceof ViewHelperPluginManager) {
+                            $mvcevent = $sm->getServiceLocator()
                                         ->get('Application')
-                                        ->getMvcEvent()
-                        );
+                                        ->getMvcEvent();
+                        } else {
+                            $mvcevent = $sm->get('Application')
+                                        ->getMvcEvent();
+                        }
+                        
+                        return new RouteMatchViewHelper($sm, $mvcevent);
                     }],
             ];
         }

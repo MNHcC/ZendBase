@@ -45,8 +45,8 @@ namespace MNHcC\Module {
          * @return mixed
          */
         public function setEventManager(EventManagerInterface $events) {
-            return $this->setEventManagerTrait($events)
-                ->getEventManager()
+            $this->setEventManagerTrait($events);
+            $this->getEventManager()
                 ->setIdentifiers(\array_merge(
                     $this->getEventManager()->getIdentifiers(), ['Module']
                 )
