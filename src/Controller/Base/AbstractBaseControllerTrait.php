@@ -180,7 +180,7 @@ namespace MNHcC\Controller\Base {
             }
             if(! $sm instanceof ServiceLocatorInterface){
                 throw new \LogicException(sprintf('No ServiceLocator found! ServiceLocator musst from type %s, %s is given.'. PHP_EOL
-                        . 'Is the controller initialized?', ServiceLocatorAwareInterface::class, (is_object($sm) ? get_class($sm) : gettype($sm)) ));
+                        . 'Is the controller initialized?', ServiceLocatorInterface::class, (is_object($sm) ? get_class($sm) : gettype($sm)) ));
             }
             return $sm;
         }
