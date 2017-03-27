@@ -16,6 +16,9 @@ if (php_sapi_name() === 'cli-server') {
 require 'init_autoloader.php';
 
 $configuration = include 'config/application.config.php';
+if (class_exists(Zend\Router\Module::class)) {
+    $configuration['modules'][] = Zend\Router::class;
+}
 $moduleLoader = new ModuleLoader($configuration);
 /* @var $serviceManager ServiceManager */
 $serviceManager = $moduleLoader->getServiceManager();
